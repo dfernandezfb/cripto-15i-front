@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-
-import axios from "../../config/axios";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 const LoginForm = () => {
+  const { login, authenticated } = useContext(UserContext);
   const navigate = useNavigate();
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-  const [backErrors, setBackErrors] = useState(false);
   const handleChange = (e) => {
     setValues({
       ...values,
@@ -19,24 +17,16 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const { data } = await axios.post("/users/login", values);
-      localStorage.setItem("token", data.token);
-      navigate("/home");
-    } catch (error) {
-      toast.error("Ups! Hubo un error, intenta más tarde por favor");
-      setBackErrors(true);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(values);
   };
+
   useEffect(() => {
-    if (backErrors) {
-      setTimeout(() => {
-        setBackErrors(false);
-      }, 3000);
+    if (authenticated) {
+      navigate("/home");
     }
-  }, [backErrors]);
+  }, [authenticated]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -64,7 +54,7 @@ const LoginForm = () => {
       <Button variant="primary" type="submit">
         Submit
       </Button>
-      {backErrors && (
+      {false && (
         <Alert variant="danger" className="mt-3">
           {" "}
           El formato de los datos enviados no es correcto
