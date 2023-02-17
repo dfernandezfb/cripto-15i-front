@@ -1,5 +1,7 @@
+import UsersTable from "../components/UsersTable/UsersTable";
+
 const Home = () => {
-  return <h1>home</h1>;
+  return <UsersTable />;
 };
 
 export default Home;
