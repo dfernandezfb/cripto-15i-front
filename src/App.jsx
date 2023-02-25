@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
+  console.log("hola");
   return (
     <Router>
       <UserProvider>

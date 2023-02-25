@@ -11,10 +11,14 @@ const Button = ({ content, tooltip, ...props }) => {
       delay={{ show: 250, hide: 400 }}
       overlay={<Tooltip id="button-tooltip">{tooltip}</Tooltip>}
     >
-      <ButtonBootstrap {...props}>{content}</ButtonBootstrap>
+      <ButtonBootstrap {...props} className="m-2">
+        {content}
+      </ButtonBootstrap>
     </OverlayTrigger>
   ) : (
-    <ButtonBootstrap {...props}>{content}</ButtonBootstrap>
+    <ButtonBootstrap {...props} className="m-2">
+      {content}
+    </ButtonBootstrap>
   );
 };
 

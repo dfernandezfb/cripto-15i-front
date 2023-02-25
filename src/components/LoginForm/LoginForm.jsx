@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { LOGIN_VALUES } from "../../constants";
 import { UserContext } from "../../context/UserContext";
 import { validationLogin } from "../../helpers/validations";
-import useForm from "../../hooks/useForm";
+import useForm from "@/hooks/useForm";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import Button from "../common/Button/Button";
 
